@@ -6,4 +6,8 @@ class Question < ActiveRecord::Base
   def pay_points
   	self.user.add_points -10
   end
+
+  def answered?
+  	answers.where(accepted: true).count > 0
+  end
 end

@@ -1,7 +1,15 @@
 .answer id="answer-#{answer.id}"
   .contents= answer.contents
   .details
-    '  Answered on
+  	= pluralize(answer.points, "like")
+    - if answer.user != current_user
+      span.like  | I like this answer!  
+      - if !answer.accepted?
+        span.accept  | Accept this answer as satisfactory 
+    - if answer.accepted?
+      '  | Accepted as satisfactory!
+    br 
+    ' Answered on
     = l(answer.created_at, format: :long)
     '  by
     = link_to answer.user, user_path(answer.user)
