@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   has_many :answers
 
   def to_s
-    email
+    name
   end
 end

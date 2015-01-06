@@ -5,6 +5,10 @@ gem 'rails', '4.1.1'
 gem 'sqlite3'
 gem 'devise'
 
+# js
+gem 'execjs'
+gem 'therubyracer'
+
 # frontend
 gem 'slim-rails'
 gem 'sass-rails', '~> 4.0.3'
