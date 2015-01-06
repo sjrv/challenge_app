@@ -8,10 +8,10 @@ Rails.application.routes.draw do
     resources :answers, only: [:create]
   end
 
+  devise_for :users, :controllers => { registrations: 'registrations' }, only: [:show]
 
   # resources :users, only: [:show]
 
-  devise_for :users, :controllers => { registrations: 'registrations' }, only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
