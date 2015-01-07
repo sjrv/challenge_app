@@ -1,5 +1,5 @@
 .answer id="answer-#{answer.id}" data-id=answer.id class="#{answer.accepted ? 'accepted' : ''}"
-  .contents= answer.contents
+  .contents= markdown(answer.contents)
   .details
   	span.likes_count
   	  = pluralize(answer.points, "like")
