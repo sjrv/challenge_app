@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :answers, only: [:create]
   end
 
+  post '/answers', controller: 'answers', action: :ajax
+
   devise_for :users, :controllers => { registrations: 'registrations' }, only: [:show]
 
   # resources :users, only: [:show]

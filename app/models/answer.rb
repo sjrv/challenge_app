@@ -11,6 +11,12 @@ class Answer < ActiveRecord::Base
   	self.save
   end
 
+  def unaccept
+    self.accepted = false
+    self.user.add_points -15
+    self.save
+  end
+
   def like user
   	self.user.add_points 5
   	self.likes.create user_id: user.id

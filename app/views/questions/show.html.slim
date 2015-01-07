@@ -1,4 +1,4 @@
-.question id="question-#{@question.id}"
+.question id="question-#{@question.id}" data-id=@question.id
   h2= @question.title
 
   = render "details", question: @question
