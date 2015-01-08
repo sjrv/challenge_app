@@ -1,0 +1,16 @@
+h2 Leaderboard
+- @users.each do |user|
+  .user
+    .avatar= user.pic
+    .name_field
+      .name
+        span.name= user.name
+      .points
+        - if user.superstar
+         span.star ★
+        span.score= user.points
+    .questions_and_answers
+      ' asked
+      span.number_questions= " #{pluralize(user.questions.count,'question')}"
+      ' , gave
+      span.number_answers= " #{pluralize(user.answers.count,'answer')} (#{user.accepted_answers.count} accepted)"
