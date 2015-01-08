@@ -9,16 +9,30 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :liked_answers, through: :likes, source: :answer
 
+  mount_uploader :avatar, AvatarUploader
+  
+  after_create :set_points
+
+  def set_points
+    self.points = 100
+    self.save
+  end
+
   def to_s
-    name
+    if self.name
+      name
+    else
+      email
+    end
+  end
+
+  def accepted_answers
+    self.answers.where(accepted: true)
   end
 
   def add_points i
   	self.points += i
+    self.superstar = true if self.points >= 1000
   	self.save
-  end
-
-  def superstar?
-  	self.points >= 1000
   end
 end

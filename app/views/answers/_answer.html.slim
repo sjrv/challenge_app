@@ -3,20 +3,19 @@
   .details
   	span.likes_count
   	  = pluralize(answer.points, "like")
-  	'  |
-    - if answer.user != current_user
+    - if true #answer.user != current_user
+      '  |
       - if answer.liked_by? current_user
-        span.like I don't like it anymore
+        = link_to "Unlike", like_answer_path(@question, answer), class: :like, method: :put, remote: true
       - else
-        span.like  I like this answer!  
-      - if !answer.accepted
+        = link_to "Like", like_answer_path(@question, answer), class: :like, method: :put, remote: true
+      - if !answer.accepted && answer.user != current_user && @question.user == current_user
         '  |
-        span.accept  Accept this answer as satisfactory 
+        = link_to "Accept", accept_answer_path(@question, answer), method: 'PUT'
     - if answer.accepted
       '  |
       '  Accepted as satisfactory!
-    br 
-    ' Answered on
+    '  | Answered on
     = l(answer.created_at, format: :long)
     '  by
     = link_to answer.user, user_path(answer.user)

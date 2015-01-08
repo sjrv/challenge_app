@@ -8,9 +8,11 @@ Rails.application.routes.draw do
     resources :answers, only: [:create]
   end
 
-  get '/leaderboard', controller: 'users', action: :leaderboard
-
+#  get '/leaderboard', controller: 'users', action: :leaderboard
   post '/answers', controller: 'answers', action: :ajax
+  
+  put '/questions/:question_id/answers/:answer_id/like', controller: 'answers', action: :like, as: :like_answer
+  put '/questions/:question_id/answers/:answer_id/accept', controller: 'answers', action: :accept, as: :accept_answer
 
   devise_for :users, :controllers => { registrations: 'registrations' }, only: [:show]
 

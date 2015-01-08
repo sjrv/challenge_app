@@ -16,33 +16,35 @@ $(document).ready(function() {
 		});
 	};
 
-	$('span.like').click(function() {
+	$('a.like').bind('ajax:success', function(status, data, xhr) {
+  		var answer;
+		var count;
+		var text;
+		//console.log("DONE");
+		//console.log(data);
+		//console.log(status);
+		//res = $.parseJSON(res.responseText);
+		//console.log(res);
+		answer = $('div.answer[data-id='+data.answer_id+']');
+		count = answer.find('span.likes_count');
+		text = answer.find('a.like');
+		count.html(data.count);
+		text.text(data.click);
+	});
+/*
+	$('a.like').click(function() {
 		ajaxReq('like', $(this), function(res) {
 				var answer;
 				var count;
 				var text;
 				res = $.parseJSON(res.responseText);
+				//console.log(res);
 				answer = $('div.answer[data-id='+res.answer_id+']');
 				count = answer.find('span.likes_count');
-				text = answer.find('span.like');
+				text = answer.find('a.like');
 				count.html(res.count);
 				text.html(res.click);
 		});
 	});
-
-	$('span.accept').click(function() {
-		ajaxReq('accept', $(this), function(res) {
-				var answer;
-				var text;
-				res = $.parseJSON(res.responseText);
-				answer = $('div.answer[data-id='+res.answer_id+']');
-				text = answer.find('span.accept');
-				text.html(res.click);
-				if (res.accepted)
-					answer.addClass('accepted');
-				else
-					answer.removeClass('accepted');
-				
-			});
-	});	
+*/
 })

@@ -18,45 +18,45 @@ class AnswersController < ApplicationController
     end
   end
 
-  def ajax
+  def accept
+    answer = Answer.find(params[:answer_id])
+    puts "Answer:"
+    puts answer
+    if answer.accepted
+      redirect_to question_path(@question), alert: "This answer has already been accepted."
+    else
+      answer.accept
+      redirect_to question_path(@question)
+    end
+  end
+
+  def like
     resp = {}
-    puts params
+    #puts "PARAMS"
+    #puts params
     answer = Answer.find(params[:answer_id])
     
-    if current_user == answer.user
-      render json: {errors: ['Tampering with code to like own answers? Really?']}
-    end
-
     resp[:answer_id] = params[:answer_id]
 
-    if params[:act] == 'like'
-      if answer.liked_by? current_user
-        answer.unlike current_user
-        resp[:click] = "I like this answer!"
-      else
-        answer.like current_user
-        resp[:click] = "I don't like it anymore."
-      end
-      
-      resp[:count] = view_context.pluralize(answer.points,'like')
-    elsif params[:act] == 'accept'
-      if answer.accepted?
-        answer.unaccept
-        resp[:click] = "Accept this answer as satisfactory"
-      else
-        answer.accept
-        resp[:click] = "I changed my mind, this answer is not good enough"
-      end
-
-      resp[:accepted] = answer.accepted?
+    if answer.liked_by? current_user
+      answer.unlike current_user
+      resp[:click] = "Like"
+    else
+      answer.like current_user
+      resp[:click] = "I don't like it anymore."
     end
 
+    resp[:count] = view_context.pluralize(answer.points,'like')
+    #puts "RESPONSE"
+    #puts resp
     render json: resp
   end
 
   private
 
     def set_question
+      #puts "PARAMS:"
+      #puts params
       @question = Question.find(params[:question_id])
     end
 

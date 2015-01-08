@@ -1,10 +1,12 @@
 h2 Leaderboard
 - @users.each do |user|
-  .user
-    .avatar= user.pic
+  .user_item
+    .avatar
+      - if user.avatar.length > 0
+        img src=user.avatar
     .name_field
       .name
-        span.name= user.name
+        span.name= link_to user.name, user_path(user)
       .points
         - if user.superstar
          span.star ★

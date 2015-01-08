@@ -1,5 +1,8 @@
 Then(/^I should have (\d+) points$/) do |points|
-  expect(@user.reload.points).to be(100)
+  # since same test was used for creating a question and creating new user
+  # flat number requirement wouldn't work
+  # was flat 100, changed it to points.to_i
+  expect(@user.reload.points).to be(points.to_i)
 end
 
 Given(/^I have (\d+) points$/) do |points|

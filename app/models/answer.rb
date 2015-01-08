@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   has_many :likes
   has_many :liked_by, through: :likes, source: :user
   after_destroy :remove_likes
+  validates_length_of :contents, minimum: 1, allow_blank: false, message: "is required"
 
   def accept
   	self.accepted = true

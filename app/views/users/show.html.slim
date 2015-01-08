@@ -1,7 +1,17 @@
 .user id="user-#{@user.id}"
   h2= @user
-  - if @user.superstar?
-    .superstar_badge
+  .points
+    - if @user.superstar
+      ' ★
+      span.points= @user.points
+      '  points - superstar user
+    - else
+      span.points= @user.points
+      '  points
+  
+  .header
+    .avatar
+      img src=@user.avatar alt=''
 
   .questions
     h3 Questions
