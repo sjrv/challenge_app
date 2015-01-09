@@ -25,6 +25,8 @@ class AnswersMailer < ActionMailer::Base
 
   def accept_answer aid
   	setup_mail aid
+    puts "ANSWER:".red
+    puts @answer
   	message = {
   		to: @answer.user.email,
   		subject: "Your answer to question '#{@question.title}' has been accepted"

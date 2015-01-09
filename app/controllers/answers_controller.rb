@@ -12,9 +12,8 @@ class AnswersController < ApplicationController
     end
 
     if @answer.save
-      puts "SENDING".cyan
-      #puts MailWorker.perform_async(:new, @answer.id)
-      puts AnswersMailer.delay.new_answer(@answer.id)
+      puts "SENDING MAIL".cyan
+      AnswersMailer.delay.new_answer(@answer.id)
       redirect_to question_path(@question), notice: "Answer was successfully created."
     else
       redirect_to question_path(@question), alert: "There was an error when adding answer."
@@ -29,12 +28,8 @@ class AnswersController < ApplicationController
       redirect_to question_path(@question), alert: "This answer has already been accepted."
     else
       answer.accept
-      mail = AnswersMailer.accept_answer(@answer.id)
-      puts "MAIL:".yellow
-      puts mail
-      puts "SENDING".cyan
-      puts mail.deliver!
-      puts "SENT".cyan
+      puts "ANSWER ACCEPTED MAIL".cyan
+      puts AnswersMailer.delay.accept_answer(answer.id)
       redirect_to question_path(@question)
     end
   end

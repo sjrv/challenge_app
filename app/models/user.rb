@@ -44,10 +44,10 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     email = auth['info']['email']
     user = find_by_email(email)
-    binding.pry
+    #binding.pry
     return user if user
     user = create! email: email, name: auth['info']['nickname'], uid: auth['uid'], provider: auth['provider']
-    binding.pry
+    #binding.pry
     user
   end  
 end
