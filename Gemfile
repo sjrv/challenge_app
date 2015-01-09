@@ -7,7 +7,7 @@ gem 'devise'
 gem 'rmagick'
 gem 'omniauth-github'
 gem 'sidekiq'
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails'
 gem 'pry'
 gem 'thin'
 
