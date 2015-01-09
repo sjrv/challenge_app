@@ -23,15 +23,18 @@ module ChallengeApp
     config.autoload_paths += %W(#{config.root}/app/workers)
 
     config.action_mailer.default_url_options = { host: "hotcode.pl:3000"}
+    config.action_mailer.default_options = {
+      from: "sjmr@op.pl"
+    }
     config.action_mailer.delivery_method = :smtp
     smtp = {
-      address: 'smtp.poczta.onet.pl',
-      port: 465,
-      domain: 'hotcode.pl',
+      address: ENV['SMTP_ADDRESS'],
+      port: ENV['SMTP_PORT'],
+      domain: ENV['SMTP_DOMAIN'],
       user_name: ENV['SMTP_USER'],
       password: ENV['SMTP_PASSWORD'],
-      authentication: 'plain',
-      enable_starttls_auto: true
+      authentication: ENV['SMTP_AUTHENTICATION'],
+      enable_starttls_auto: ENV['SMTP_TLSAUTO']
     }
     config.action_mailer.smtp_settings = smtp
 

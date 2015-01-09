@@ -1,10 +1,8 @@
 class AnswersMailer < ActionMailer::Base
-  default from: "sjorvv@gmail.com"
-  
   def setup_mail aid
-  answer = Answer.find(aid)
-  @question = answer.question
-  @answer = answer
+    answer = Answer.find(aid)
+    @question = answer.question
+    @answer = answer
   end
 
   def new_answer aid

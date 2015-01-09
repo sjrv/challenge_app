@@ -10,7 +10,7 @@ class Question < ActiveRecord::Base
 
   def has_enough_points
     if user.points < 10
-      errors.add("You", "have not enough points")
+      errors.add(:user, "has not enough points")
     end
   end
   

@@ -16,7 +16,7 @@ end
 
 When(/^This answer is liked$/) do
   # new sign_in seems to be unnecessary
-  sign_in_as(@answer.question.user)
+  # sign_in_as(@answer.question.user)
   visit question_path(@answer.question)
   within(:css, "#answer-#{@answer.id}") do
     click_on "Like"

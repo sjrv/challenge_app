@@ -2,9 +2,9 @@ module ApplicationHelper
 
   def markdown text
     render_options = {
-    filter_html:     true,
-    hard_wrap:       true, 
-    link_attributes: {rel: 'nofollow'}
+      filter_html:     true,
+      hard_wrap:       true, 
+      link_attributes: {rel: 'nofollow'}
     }
 
     renderer = Redcarpet::Render::HTML.new(render_options)

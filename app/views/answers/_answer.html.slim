@@ -9,7 +9,7 @@
         = link_to "Unlike", like_answer_path(@question, answer), class: :like, method: :put, remote: true
       - else
         = link_to "Like", like_answer_path(@question, answer), class: :like, method: :put, remote: true
-      - if !answer.accepted && answer.user != current_user && @question.user == current_user
+      - if !answer.accepted && answer.user != current_user && @question.user == current_user && !@question.answered?
         '  |
         = link_to "Accept", accept_answer_path(@question, answer), method: 'PUT'
     - if answer.accepted
