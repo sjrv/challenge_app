@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable, :omniauthable
   # :recoverable, :rememberable and :trackable
   devise :database_authenticatable, :registerable, :validatable
+  devise :omniauthable, :omniauth_providers => [:github]
 
   has_many :questions
   has_many :answers
@@ -10,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :liked_answers, through: :likes, source: :answer
 
   mount_uploader :avatar, AvatarUploader
-  
+
   after_create :set_points
 
   def set_points
@@ -35,4 +36,18 @@ class User < ActiveRecord::Base
     self.superstar = true if self.points >= 1000
   	self.save
   end
+
+  def password_required?
+    super && provider.blank?
+  end
+
+  def self.from_omniauth(auth)
+    email = auth['info']['email']
+    user = find_by_email(email)
+    binding.pry
+    return user if user
+    user = create! email: email, name: auth['info']['nickname'], uid: auth['uid'], provider: auth['provider']
+    binding.pry
+    user
+  end  
 end

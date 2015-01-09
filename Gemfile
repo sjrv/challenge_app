@@ -2,8 +2,17 @@ source 'https://rubygems.org'
 
 # core
 gem 'rails', '4.1.1'
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 gem 'devise'
+gem 'rmagick'
+gem 'omniauth-github'
+gem 'sidekiq'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'pry'
+
+# backend
+gem 'colorize'
 
 # js
 gem 'execjs'
@@ -19,7 +28,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'redcarpet'
 gem 'carrierwave'
-gem 'rmagick'
 
 # doc
 gem 'sdoc', '~> 0.4.0',          group: :doc
@@ -39,4 +47,3 @@ group :test do
   gem "factory_girl"
   gem "rspec-rails"
 end
-

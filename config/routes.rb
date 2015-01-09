@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+#  mount Sidekiq::Web, at: "/sidekiq"
+
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }
   resources :users
   resource :user
   root to: 'questions#index'
@@ -8,13 +10,13 @@ Rails.application.routes.draw do
     resources :answers, only: [:create]
   end
 
-#  get '/leaderboard', controller: 'users', action: :leaderboard
+  get '/leaderboard', controller: 'users', action: :index
   post '/answers', controller: 'answers', action: :ajax
   
   put '/questions/:question_id/answers/:answer_id/like', controller: 'answers', action: :like, as: :like_answer
   put '/questions/:question_id/answers/:answer_id/accept', controller: 'answers', action: :accept, as: :accept_answer
 
-  devise_for :users, :controllers => { registrations: 'registrations' }, only: [:show]
+  # get '/auth/github/callback', to: 'sessions#create'
 
   # resources :users, only: [:show]
 

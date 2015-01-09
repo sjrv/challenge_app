@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108112446) do
+ActiveRecord::Schema.define(version: 20150108201125) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20150108112446) do
     t.text     "contents"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "accepted"
+    t.boolean  "accepted", default: false
+    t.integer  "likes_count", default: 0
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
@@ -50,6 +51,8 @@ ActiveRecord::Schema.define(version: 20150108112446) do
     t.string   "avatar"
     t.integer  "points",             default: 100
     t.boolean  "superstar"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

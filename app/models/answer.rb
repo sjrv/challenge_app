@@ -18,20 +18,27 @@ class Answer < ActiveRecord::Base
     self.save
   end
 
+  def fix_likes
+    self.likes_count = likes.count
+    self.save
+  end
+
   def like user
   	self.user.add_points 5
+    self.likes_count += 1
   	self.likes.create user_id: user.id
   	self.save
   end
 
   def unlike user
   	self.user.add_points -5
+    self.likes_count -= 1
   	self.likes.find_by(user_id: user.id).destroy
   	self.save
   end
 
   def points
-  	likes.count
+  	self.likes_count
   end
 
   def liked_by? user
