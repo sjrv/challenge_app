@@ -1,0 +1,13 @@
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+
+  body
+    = "Hi, #{@question.user.name}"
+    br
+    = "#{@answer.user.name} posted an answer to your question '#{@question.title}'"
+    br
+    ' Visit
+    = question_url(@question)
+    '  to see it!
+

@@ -1,0 +1,4 @@
+= "Hi, #{@question.user.name}\n"
+= "-"*20
+= "\n#{@answer.user.name} posted an answer to your question '#{@question.title}'\n"
+= "\nVisit #{link_to(" this link", question_url(@question))} to see it!\n"
