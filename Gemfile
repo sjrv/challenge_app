@@ -9,6 +9,7 @@ gem 'omniauth-github'
 gem 'sidekiq'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'pry'
+gem 'thin'
 
 # heroku
 gem 'rails_12factor'
