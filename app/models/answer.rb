@@ -7,9 +7,9 @@ class Answer < ActiveRecord::Base
   validates_length_of :contents, minimum: 1, allow_blank: false, message: "is required"
 
   def accept
-  	self.accepted = true
-  	self.user.add_points 25
-  	self.save
+    self.accepted = true
+    self.user.add_points 25
+    self.save
   end
 
   def unaccept
@@ -24,28 +24,28 @@ class Answer < ActiveRecord::Base
   end
 
   def like user
-  	self.user.add_points 5
+    self.user.add_points 5
     self.likes_count += 1
-  	self.likes.create user_id: user.id
-  	self.save
+    self.likes.create user_id: user.id
+    self.save
   end
 
   def unlike user
-  	self.user.add_points -5
+    self.user.add_points -5
     self.likes_count -= 1
-  	self.likes.find_by(user_id: user.id).destroy
-  	self.save
+    self.likes.find_by(user_id: user.id).destroy
+    self.save
   end
 
   def points
-  	self.likes_count
+    self.likes_count
   end
 
   def liked_by? user
-  	liked_by.include?(user)
+    liked_by.include?(user)
   end
 
   def remove_likes
-  	likes.each{|like| like.destroy}
+    likes.each{|like| like.destroy}
   end
 end
