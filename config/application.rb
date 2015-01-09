@@ -24,7 +24,7 @@ module ChallengeApp
 
     config.action_mailer.default_url_options = { host: "hotcode.pl:3000"}
     config.action_mailer.default_options = {
-      from: "sjmr@op.pl"
+      from: "sjrv.monterail.challenge@gmail.com"
     }
     config.action_mailer.delivery_method = :smtp
     smtp = {
