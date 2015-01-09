@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 # core
 gem 'rails', '4.1.1'
-# gem 'sqlite3'
 gem 'pg'
 gem 'devise'
 gem 'rmagick'
@@ -10,6 +9,9 @@ gem 'omniauth-github'
 gem 'sidekiq'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'pry'
+
+# heroku
+gem 'rails_12factor'
 
 # backend
 gem 'colorize'
