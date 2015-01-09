@@ -16,22 +16,22 @@ end
 
 When(/^This answer is liked$/) do
   # new sign_in seems to be unnecessary
-  #sign_in_as(@answer.question.user)
+  sign_in_as(@answer.question.user)
   visit question_path(@answer.question)
   within(:css, "#answer-#{@answer.id}") do
     click_on "Like"
   end
 
-  expect(@user.reload.points).to be(105)
+  expect(@user.points).to be(105)
 end
 
 When(/^This answer is accepted$/) do
   # new sign_in seems to be unnecessary
-  # sign_in_as(@answer.question.author)
+  sign_in_as(@answer.question.user)
   visit question_path(@answer.question)
   within(:css, "#answer-#{@answer.id}") do
     click_on "Accept"
   end
 
-  expect(@user.reload.points).to be(125)
+  expect(@user.points).to be(125)
 end
