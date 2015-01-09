@@ -22,3 +22,6 @@ config/database.yml
 # Ignore public folders
 public/assets/*
 public/uploads/*
+
+# Ignore bin files
+bin/*
