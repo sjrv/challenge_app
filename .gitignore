@@ -19,4 +19,6 @@ tmp/
 config/database.yml
 .env
 
-
+# Ignore public folders
+public/assets/*
+public/uploads/*
