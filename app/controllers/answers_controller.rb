@@ -12,7 +12,6 @@ class AnswersController < ApplicationController
     end
 
     if @answer.save
-      puts "SENDING MAIL".cyan
       AnswersMailer.delay.new_answer(@answer.id)
       redirect_to question_path(@question), notice: "Answer was successfully created."
     else
@@ -22,22 +21,16 @@ class AnswersController < ApplicationController
 
   def accept
     answer = Answer.find(params[:answer_id])
-    puts "Answer:"
-    puts answer
     if answer.accepted
       redirect_to question_path(@question), alert: "This answer has already been accepted."
     else
       answer.accept
-      puts "ANSWER ACCEPTED MAIL".cyan
-      puts AnswersMailer.delay.accept_answer(answer.id)
       redirect_to question_path(@question)
     end
   end
 
   def like
     resp = {}
-    #puts "PARAMS"
-    #puts params
     answer = Answer.find(params[:answer_id])
     
     resp[:answer_id] = params[:answer_id]
@@ -51,16 +44,12 @@ class AnswersController < ApplicationController
     end
 
     resp[:count] = view_context.pluralize(answer.points,'like')
-    #puts "RESPONSE"
-    #puts resp
     render json: resp
   end
 
   private
 
     def set_question
-      #puts "PARAMS:"
-      #puts params
       @question = Question.find(params[:question_id])
     end
 

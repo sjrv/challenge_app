@@ -6,6 +6,14 @@ class Question < ActiveRecord::Base
 
   validates_length_of :title, minimum: 1, allow_blank: false, message: "is required"
 
+  validate :has_enough_points
+
+  def has_enough_points
+    if user.points < 10
+      errors.add("You", "have not enough points")
+    end
+  end
+  
   def author
     self.user
   end

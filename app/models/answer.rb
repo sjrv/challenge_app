@@ -1,9 +1,8 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :user
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :liked_by, through: :likes, source: :user
-  after_destroy :remove_likes
   validates_length_of :contents, minimum: 1, allow_blank: false, message: "is required"
 
   def accept
@@ -43,9 +42,5 @@ class Answer < ActiveRecord::Base
 
   def liked_by? user
     liked_by.include?(user)
-  end
-
-  def remove_likes
-    likes.each{|like| like.destroy}
   end
 end

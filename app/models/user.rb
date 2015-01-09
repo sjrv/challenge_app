@@ -32,9 +32,9 @@ class User < ActiveRecord::Base
   end
 
   def add_points i
-  	self.points += i
+    self.points += i
     self.superstar = true if self.points >= 1000
-  	self.save
+    self.save
   end
 
   def password_required?
@@ -44,10 +44,8 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     email = auth['info']['email']
     user = find_by_email(email)
-    #binding.pry
     return user if user
     user = create! email: email, name: auth['info']['nickname'], uid: auth['uid'], provider: auth['provider']
-    #binding.pry
     user
   end  
 end

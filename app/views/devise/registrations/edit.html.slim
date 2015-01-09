@@ -12,29 +12,30 @@ h2 Edit Profile
     .preview
       - if current_user.avatar.length > 0
         = image_tag(current_user.avatar.url) 
-      = f.label :remove_avatar do        
-        = f.check_box :remove_avatar 
-        ' Remove avatar
+        = f.label :remove_avatar do        
+          = f.check_box :remove_avatar 
+          ' Remove avatar
 
     = f.file_field :avatar
 
   = f.hidden_field :avatar_cache
 
-  .field
-    = f.label :password
-    .hint
-      ' (leave blank if you don't want to change it)
-    = f.password_field :password, autocomplete: "off"
+  - if !current_user.provider
+    .field
+      = f.label :password
+      .hint
+        ' (leave blank if you don't want to change it)
+      = f.password_field :password, autocomplete: "off"
 
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation, autocomplete: "off"
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: "off"
 
-  .field
-    = f.label :current_password
-    .hint
-      ' (we need your current password to confirm your changes)
-    = f.password_field :current_password, autocomplete: "off"
+    .field
+      = f.label :current_password
+      .hint
+        ' (we need your current password to confirm your changes)
+      = f.password_field :current_password, autocomplete: "off"
 
   div
     = f.submit "Update"
