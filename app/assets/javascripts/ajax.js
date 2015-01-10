@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on("ready page:load", function() {
   $('a.like').bind('ajax:success', function(status, data, xhr) {
     var answer;
     var count;
