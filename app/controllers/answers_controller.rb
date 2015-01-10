@@ -25,6 +25,7 @@ class AnswersController < ApplicationController
       redirect_to question_path(@question), alert: "This answer has already been accepted."
     else
       answer.accept
+      AnswersMailer.delay.accept_answer(answer.id)
       redirect_to question_path(@question)
     end
   end
