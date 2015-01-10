@@ -40,7 +40,7 @@ class AnswersController < ApplicationController
       resp[:click] = "Like"
     else
       answer.like current_user
-      resp[:click] = "I don't like it anymore."
+      resp[:click] = "Unlike"
     end
 
     resp[:count] = view_context.pluralize(answer.points,'like')
